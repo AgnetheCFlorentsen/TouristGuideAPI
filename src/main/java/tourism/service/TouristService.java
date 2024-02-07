@@ -18,5 +18,11 @@ public class TouristService {
         return repository.getTouristAttraction(name);
     }
 
+    public TouristAttraction addAttraction(String name, String description){
+        TouristAttraction touristAttraction = new TouristAttraction(name, description);
+        repository.addAttraction(touristAttraction);
+        return touristAttraction;
+    }
+
 
 }

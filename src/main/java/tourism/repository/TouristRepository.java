@@ -26,12 +26,16 @@ public List<TouristAttraction> getTouristAttractions(){
 
 public TouristAttraction getTouristAttraction (String name){
         for (TouristAttraction t : attractions){
-            if (name.equals(t.getName())){
+            if (name.equalsIgnoreCase(t.getName())){
                 return t;
             }
         }
         return null;
-}
+    }
+
+    public void addAttraction(TouristAttraction touristAttraction){
+        attractions.add(touristAttraction);
+    }
 
 
 }
