@@ -16,8 +16,8 @@ public class TouristRepository {
     public TouristRepository(){
         this.attractions = new ArrayList<>();
         attractions.add(new TouristAttraction("Guldbar", "Fredagscafé"));
-        attractions.add(new TouristAttraction("Hatten", "God bar"));
-        attractions.add(new TouristAttraction("Bip bip bar", "Dyr bar"));
+        attractions.add(new TouristAttraction("Hatten", "Godbar"));
+        attractions.add(new TouristAttraction("BipBipBar", "Dyr bar"));
     }
 
 public List<TouristAttraction> getTouristAttractions(){

@@ -9,6 +9,7 @@ import tourism.model.TouristAttraction;
 import tourism.service.TouristService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("attractions")
