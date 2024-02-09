@@ -1,7 +1,9 @@
 package tourism.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("attractions")
+@RequestMapping(path="attractions", method={RequestMethod.GET, RequestMethod.POST})
 public class TouristController {
 
     private TouristService touristService;
@@ -32,20 +34,43 @@ public class TouristController {
         return new ResponseEntity<TouristAttraction>(t, HttpStatus.OK);
     }
 
-    /*@GetMapping(path = "/add")
+    @GetMapping(path = "/delete/{name}")
+    public ResponseEntity<List<TouristAttraction>> deleteAttraction(@PathVariable String name) {
+       List attractions = touristService.deleteAttraction(name);
+        return new ResponseEntity<List<TouristAttraction>>(attractions, HttpStatus.OK);
+    }
 
-    public ResponseEntity<TouristAttraction> addAttraction(@PathVariable String name, @PathVariable String description) {
-        TouristAttraction t = touristService.addAttraction(name, description);
-        return new ResponseEntity<TouristAttraction>(touristService.addAttraction(name, description), HttpStatus.OK);
-    }*/
+    @PostMapping(path="/add")
+   public ResponseEntity<TouristAttraction> addAttraction (@RequestParam @RequestBody Map<String, String> numbers) {
+        String name = numbers.get("newName");
+        String description = numbers.get("newDescription");
+       TouristAttraction touristAttraction = touristService.addAttraction(new TouristAttraction(name, description));
+       return new ResponseEntity<TouristAttraction>(touristAttraction, HttpStatus.OK);
+   }
 
-    @GetMapping("/add")//dette er et endpoint
-    public ResponseEntity<TouristAttraction> calculate(@RequestParam Map<String, String> numbers) {
+    @PostMapping(path="/update")
+    public ResponseEntity<TouristAttraction> updateAttraction (@RequestParam @RequestBody Map<String, String> numbers) {
+        String name = numbers.get("name");
+        String description = numbers.get("updateDescription");
+        TouristAttraction touristAttraction = touristService.updateAttraction(name, description);
+        return new ResponseEntity<TouristAttraction>(touristAttraction, HttpStatus.OK);
+    }
+
+
+
+    /*@PostMapping(path = "/opret")
+    public String postAttraction(@RequestBody @RequestParam Map<String, String> numbers) {
         String name = numbers.get("name");
         String description = numbers.get("description");
-        return new ResponseEntity<TouristAttraction>(touristService.addAttraction(name, description), HttpStatus.OK);
+        TouristAttraction touristAttraction = touristService.addAttraction(new TouristAttraction(name, description));
+        return "Attraktionen er oprettet!";
+    }*/
 
 
-    }
+
+
 }
+
+
+
 

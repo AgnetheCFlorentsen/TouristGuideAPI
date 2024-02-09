@@ -37,5 +37,25 @@ public TouristAttraction getTouristAttraction (String name){
         attractions.add(touristAttraction);
     }
 
+    public TouristAttraction updateAttraction(String name, String newDescription) {
+        for (TouristAttraction t : attractions) {
+            if (name.equalsIgnoreCase(t.getName())) {
+                t.setDescription(newDescription);
+                return t;
+            }
+
+        }
+        return null;
+    }
+
+    public List<TouristAttraction> deleteAttraction(String name) {
+        for (TouristAttraction t : attractions) {
+            if (name.equalsIgnoreCase(t.getName())) {
+                attractions.remove(t);
+            }
+        }
+        return attractions;
+    }
+
 
 }
